@@ -1,0 +1,2 @@
+config SHIELD_S46R
+    def_bool $(shields_list_contains,s46r)

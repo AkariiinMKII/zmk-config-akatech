@@ -1,0 +1,115 @@
+// This file was generated from a template. Edit it to match your keyboard.
+// See https://zmk.dev/docs/development/hardware-integration/new-shield for more instructions.
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+
+&soft_off {
+    hold-time-ms = <2000>; // Only turn off it the key is held for 2 seconds or longer.
+};
+
+/ {
+    // Define a default keymap here.
+    // See https://zmk.dev/docs/development/hardware-integration/new-shield#default-keymap.
+    keymap {
+        compatible = "zmk,keymap";
+
+        // Layer 0: Base Alpha layout
+        /*
+         *  ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+         *  │ESC│ Q │ W │ E │ R │ T │ Y │ U │ I │ O │ P │BKS│DEL│
+         *  ├───┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴───┼───┤
+         *  │TAB │ A │ S │ D │ F │ G │ H │ J │ K │ L │ENT   │PGU│
+         *  ├────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴──┬───┼───┤
+         *  │SFT   │ Z │ X │ C │ V │ B │ N │ M │ / │SFT │ ↑ │PGD│
+         *  ├───┬──┴┬──┴─┬─┴─┬─┴───┴───┴─┬─┴─┬─┴──┬┴┬───┼───┼───┤
+         *  │CTL│ALT│GUI │MO1│   SPACE   │MO2│GUI │ │ ← │ ↓ │ → │
+         *  └───┴───┴────┴───┴───────────┴───┴────┘ └───┴───┴───┘
+         */
+        default_layer {
+            display-name = "Base Layer";
+            bindings = <
+                &kp ESC   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y     &kp U     &kp I     &kp O     &kp P     &kp BSPC   &kp DEL
+                &kp TAB   &kp A     &kp S     &kp D     &kp F     &kp G     &kp H     &kp J     &kp K     &kp L     &kp RET   &kp PGUP
+                &kp LSFT  &kp Z     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M     &kp FSLH  &kp RSFT  &kp UP    &kp PGDN  
+                &kp LCTRL &kp LALT  &kp LGUI  &mo 1               &kp SPACE           &mo 2     &kp RGUI  &kp LEFT  &kp DOWN  &kp RIGHT
+            >;
+        };
+
+        // Layer 1: Numeric and Symbols
+        /*
+         * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+         * │ ` │ 1 │ 2 │ 3 │ 4 │ 5 │ 6 │ 7 │ 8 │ 9 │ 0 │BKS│DEL│
+         * ├───┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴───┼───┤
+         * │TAB │   │   │   │   │ - │ = │ [ │ ] │ \ │ ENT  │PGU│
+         * ├────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴──┬───┼───┤
+         * │SFT   │   │   │   │ ; │ ' │ , │ . │ / │SFT │ ↑ │PGD│
+         * ├───┬──┴┬──┴─┬─┴─┬─┴───┴───┴─┬─┴─┬─┴──┬┴┬───┼───┼───┤
+         * │CTL│ALT│GUI │MO1│   SPACE   │MO2│GUI │ │ ← │ ↓ │ → │
+         * └───┴───┴────┴───┴───────────┴───┴────┘ └───┴───┴───┘
+         */
+        layer_1 {
+            display-name = "Numeric and Symbols";
+            bindings = <
+                &kp GRAVE &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp BSPC   &kp DEL
+                &kp TAB   &none     &none     &none     &none     &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT  &kp BSLH  &kp RET   &kp PGUP
+                &kp LSFT  &none     &none     &none     &kp SEMI  &kp SQT   &kp COMMA &kp DOT   &kp FSLH  &kp RSFT  &kp UP    &kp PGDN  
+                &kp LCTRL &kp LALT  &kp LGUI  &mo 1               &kp SPACE           &mo 2     &kp RGUI  &kp LEFT  &kp DOWN  &kp RIGHT
+            >;
+        };
+
+        // Layer 2: Shifted Numeric and Symbols
+        /*
+         * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+         * │ ~ │ ! │ @ │ # │ $ │ % │ ^ │ & │ * │ ( │ ) │BKS│INS│
+         * ├───┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴───┼───┤
+         * │CAPS│   │   │   │   │ _ │ + │ { │ } │ | │ ENT  │HOM│
+         * ├────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴──┬───┼───┤
+         * │SFT   │   │   │   │ : │ " │ < │ > │ ? │SFT │ ↑ │END│
+         * ├───┬──┴┬──┴─┬─┴─┬─┴───┴───┴─┬─┴─┬─┴──┬┴┬───┼───┼───┤
+         * │CTL│ALT│GUI │MO1│   SPACE   │MO2│CTL │ │ ← │ ↓ │ → │
+         * └───┴───┴────┴───┴───────────┴───┴────┘ └───┴───┴───┘
+         */
+        layer_2 {
+            display-name = "Shifted Numeric and Symbols";
+            bindings = <
+                &kp TILDE &kp EXCL  &kp AT    &kp HASH  &kp DLLR   &kp PRCNT &kp CARET &kp AMPS  &kp STAR   &kp LPAR  &kp RPAR  &kp BSPC   &kp INS
+                &kp CAPS  &none     &none     &none     &none      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC   &kp PIPE  &kp RET   &kp HOME
+                &kp LSFT  &none     &none     &none     &kp COLON  &kp DQT   &kp LT    &kp GT    &kp QMARK  &kp RSFT  &kp UP    &kp END
+                &kp LCTRL &kp LALT  &kp LGUI  &mo 1                &kp SPACE           &mo 2     &kp RCTRL  &kp LEFT  &kp DOWN  &kp RIGHT
+            >;
+        };
+
+        // Layer 3: Function Keys
+        /*
+         * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+         * │OFF│F1 │F2 │F3 │F4 │   │   │UNL│   │   │   │CLR│CLA│
+         * ├───┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴───┼───┤
+         * │    │F5 │F6 │F7 │F8 │   │   │BT1│BT2│BT3│OUT   │   │
+         * ├────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴──┬───┼───┤
+         * │SFT   │F9 │F10│F11│F12│BTL│   │   │   │SFT │ ↑ │   │
+         * ├───┬──┴┬──┴─┬─┴─┬─┴───┴───┴─┬─┴─┬─┴──┬┴┬───┼───┼───┤
+         * │CTL│ALT│GUI │MO1│   SPACE   │MO2│    │ │ ← │ ↓ │ → │
+         * └───┴───┴────┴───┴───────────┴───┴────┘ └───┴───┴───┘
+         */
+        layer_3 {
+            display-name = "Function Keys";
+            bindings = <
+                &soft_off   &kp F1    &kp F2    &kp F3    &kp F4    &none        &none     &studio_unlock  &none         &none         &none         &bt BT_CLR  &bt BT_CLR_ALL
+                &none       &kp F5    &kp F6    &kp F7    &kp F8    &none        &none     &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &out OUT_TOG  &none
+                &kp LSFT    &kp F9    &kp F10   &kp F11   &kp F12   &bootloader  &none     &none           &none         &kp RSFT      &kp UP        &none
+                &kp LCTRL   &kp LALT  &kp LGUI  &mo 1               &kp SPACE              &mo 2           &none         &kp LEFT      &kp DOWN      &kp RIGHT
+            >;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
+};

@@ -1,0 +1,6 @@
+if SHIELD_S46R
+
+config ZMK_KEYBOARD_NAME
+    default "S46r"
+
+endif # SHIELD_S46R
