@@ -22,3 +22,5 @@
 include:
   - board: nrfmicro_13
     shield: s46r
+  - board: nrfmicro_13
+    shield: settings_reset
